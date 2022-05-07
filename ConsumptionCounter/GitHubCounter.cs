@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace GitHub.Counter
 {
@@ -14,22 +15,26 @@ namespace GitHub.Counter
     {
         [FunctionName("GitHubCounter")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]
+                            HttpRequest req,
+                        [CosmosDB(
+                            databaseName: "ToDoItems",
+                            collectionName: "Items",
+                            ConnectionStringSetting = "CosmosDBConnection",
+                            Id = "{Query.id}",
+                            PartitionKey = "{Query.partitionKey}")] ToDoItem toDoItem,
+                        ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string name = req.Query["name"];
-
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
-
-            string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
-
-            return new OkObjectResult(responseMessage);
         }
+    }
+
+    public class CounterJson 
+    {
+        [JsonPropertyName("id")]
+        public string Id {get;set;}
+
+        [JsonPropertyName("count")]
+        public int Count {get;set;}
     }
 }
