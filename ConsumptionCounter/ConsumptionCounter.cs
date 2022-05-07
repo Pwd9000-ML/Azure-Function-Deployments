@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
 namespace GitHub.Counter
-{
+{ 
     public static class ConsumptionCounter
     {
         [FunctionName("ConsumptionCounter")]
@@ -19,12 +19,16 @@ namespace GitHub.Counter
             [CosmosDB(
                 databaseName: "%DatabaseName%",
                 collectionName: "%CollectionName%",
+                ConnectionStringSetting = "CosmosDBConnectionString")]out dynamic increment,
+            [CosmosDB(
+                databaseName: "%DatabaseName%",
+                collectionName: "%CollectionName%",
                 ConnectionStringSetting = "CosmosDBConnectionString",
                 Id = "github_main",
                 PartitionKey = "github_main")] CounterJson counter,
             ILogger log)
         {
-            counter.Count++;
+            increment = counter.Count++;
             return counter;
         }
     }
