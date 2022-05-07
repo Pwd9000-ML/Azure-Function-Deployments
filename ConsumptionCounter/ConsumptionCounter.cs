@@ -24,6 +24,7 @@ namespace GitHub.Counter
                 PartitionKey = "github_main")] CounterJson counter,
             ILogger log)
         {
+            counter.Count++;
             return counter;
         }
     }
