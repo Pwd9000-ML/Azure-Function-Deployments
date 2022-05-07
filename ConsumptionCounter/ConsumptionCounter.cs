@@ -17,9 +17,9 @@ namespace GitHub.Counter
         public static object Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             [CosmosDB(
-                databaseName: Environment.GetEnvironmentVariable("DatabaseName"),
-                collectionName: Environment.GetEnvironmentVariable("CollectionName"),
-                ConnectionStringSetting = Environment.GetEnvironmentVariable("CosmosDBConnectionString"),
+                databaseName: "%DatabaseName%",
+                collectionName: "%CollectionName%",
+                ConnectionStringSetting = "%CosmosDBConnectionString%",
                 Id = "github_main",
                 PartitionKey = "github_main")] CounterJson counter,
             ILogger log)
