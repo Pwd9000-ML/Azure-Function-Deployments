@@ -15,15 +15,15 @@ namespace GitHub.Counter
     {
         [FunctionName("GitHubCounter")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]
-                            HttpRequest req,
-                        [CosmosDB(
-                            databaseName: "ToDoItems",
-                            collectionName: "Items",
-                            ConnectionStringSetting = "CosmosDBConnection",
-                            Id = "{Query.id}",
-                            PartitionKey = "{Query.partitionKey}")] ToDoItem toDoItem,
-                        ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] 
+            HttpRequest req,
+            [CosmosDBInput(
+                datbaseName: Environment.GetEnvironmentVariable("DatabaseName"),
+                collectionName: Environment.GetEnvironmentVariable("CollectionName"),
+                ConnectionStringSetting = Environment.GetEnvironmentVariable("CosmosDBConnectionString"),
+                Id = "github_main",
+                PartitionKey = "github_main")] CounterJson counter,
+            ILogger log)
         {
 
         }
