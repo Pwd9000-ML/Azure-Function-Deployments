@@ -19,7 +19,7 @@ namespace GitHub.Counter
             [CosmosDB(
                 databaseName: "%DatabaseName%",
                 collectionName: "%CollectionName%",
-                ConnectionStringSetting = "%CosmosDBConnectionString%",
+                ConnectionStringSetting = "CosmosDBConnectionString",
                 Id = "github_main",
                 PartitionKey = "github_main")] CounterJson counter,
             ILogger log)
