@@ -2,7 +2,7 @@
 
 ## Pre-reqs
 
-More documentation / blog to come
+More documentation / blog to come / feature talk Build 2022
 
 - Cosmos DB
 - GitHub deployment center
