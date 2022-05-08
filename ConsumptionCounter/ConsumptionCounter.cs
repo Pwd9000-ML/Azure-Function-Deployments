@@ -39,3 +39,4 @@ namespace GitHub.Counter
 // dotnet add package Microsoft.Azure.WebJobs.Extensions.CosmosDB
 // dotnet add package Microsoft.Azure.Functions.Worker.Extensions.CosmosDB
 // dotnet add package Microsoft.Azure.Functions.Worker.Core
+// dotnet add package Microsoft.Azure.Functions.Worker
