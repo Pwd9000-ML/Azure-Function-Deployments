@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace My.Function
 {
@@ -65,5 +66,5 @@ namespace My.Function
     }
 }
 
-// dotnet add package Azure.Data.Tables
+// dotnet add package Microsoft.Azure.Cosmos.Table
 // DefaultEndpointsProtocol=[http|https];AccountName=myAccountName;AccountKey=myAccountKey
