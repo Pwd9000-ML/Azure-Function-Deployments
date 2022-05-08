@@ -1,13 +1,17 @@
-const url = 
-  "https://conscount02.azurewebsites.net/api/ConsCount02/";    
-const data = { URL: "Github" };
+var url = "https://conscount02.azurewebsites.net/api/ConsCount02/";
 
-const response = await fetch(url, {
-  method: "POST",
-  body: JSON.stringify(data),
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-const body = await response.json();
-console.log("Success:", JSON.stringify(response));
+var xhr = new XMLHttpRequest();
+xhr.open("POST", url);
+
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.onreadystatechange = function () {
+if (xhr.readyState === 4) {
+    console.log(xhr.status);
+    console.log(xhr.responseText);
+    document.getElementById("counter").innerHTML = xhr.responseText;
+}};
+
+var data = '{ "URL": "TEST" } ';
+
+xhr.send(data);
