@@ -7,6 +7,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'ConsCount02/**'
   workflow_dispatch:
 
 env:
