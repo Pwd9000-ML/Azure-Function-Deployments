@@ -11,7 +11,7 @@ namespace My.Function
         [FunctionName("ConsCount01")]
         [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection")]
         public static object Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+           // [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             [CosmosDB(
                 databaseName: "VisitorCounter",
                 collectionName: "GitHubCounter",
@@ -21,16 +21,17 @@ namespace My.Function
             ILogger log)
         {
             counter01.Count++;
+            
             return counter01;
         }
     }
 
     public class CounterJson
     {
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
+     //   [System.Text.Json.Serialization.JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("count")]
+   //     [System.Text.Json.Serialization.JsonPropertyName("count")]
         public int Count { get; set; }
     }
 }
