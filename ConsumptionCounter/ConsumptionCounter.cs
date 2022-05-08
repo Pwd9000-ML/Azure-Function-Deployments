@@ -8,23 +8,21 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+using Microsoft.Azure.Functions.Worker;
+
 
 namespace GitHub.Counter
 { 
     public static class ConsumptionCounter
     {
         [FunctionName("ConsumptionCounter")]
+        [CosmosDBOutput("%DatabaseName%", "%CollectionName%")]
         public static object Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            [CosmosDB(
-                databaseName: "%DatabaseName%",
-                collectionName: "%CollectionName%",
-                ConnectionStringSetting = "CosmosDBConnectionString",
-                Id = "github_main",
-                PartitionKey = "github_main")] CounterJson counter,
+            [CosmosDBInput("%DatabaseName%", "%CollectionName%", Id = "github_main", PartitionKey = "github_main")] CounterJson counter,
             ILogger log)
         {
-           // counter.Count++;
+            counter.Count++;
             return counter;
         }
     }
