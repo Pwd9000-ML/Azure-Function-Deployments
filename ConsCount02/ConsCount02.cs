@@ -68,3 +68,4 @@ namespace My.Function
 
 // dotnet add package Microsoft.Azure.Cosmos.Table
 // DefaultEndpointsProtocol=[http|https];AccountName=myAccountName;AccountKey=myAccountKey
+//Allow static site on CORS - function app (https://pwd9000staticsite.z33.web.core.windows.net)
