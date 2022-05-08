@@ -19,7 +19,12 @@ namespace GitHub.Counter
        // [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection")]
         public static object Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            [CosmosDBInput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection", Id = "github_main", PartitionKey = "github_main")] CounterJson counter,
+            [CosmosDB(
+                databaseName: "%DatabaseName%", 
+                collectionName: "%CollectionName%", 
+                ConnectionStringSetting = "CosmosConnection", 
+                Id = "github_main", 
+                PartitionKey = "github_main")] CounterJson counter,
             Microsoft.Azure.Functions.Worker.FunctionContext context)
         {
        //     counter.Count++;
@@ -37,6 +42,7 @@ namespace GitHub.Counter
     }
 }
 // dotnet add package Microsoft.Azure.WebJobs.Extensions.CosmosDB
+// dotnet add package Microsoft.Azure.WebJobs.Extensions
 // dotnet add package Microsoft.Azure.Functions.Worker.Extensions.CosmosDB
 // dotnet add package Microsoft.Azure.Functions.Worker.Core
 // dotnet add package Microsoft.Azure.Functions.Worker
