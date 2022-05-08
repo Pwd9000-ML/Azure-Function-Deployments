@@ -20,15 +20,15 @@ namespace GitHub.Counter
         public static object Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             [CosmosDB(
-                databaseName: "%DatabaseName%", 
-                collectionName: "%CollectionName%", 
+                databaseName: "VisitorCounter", 
+                collectionName: "GitHubCounter", 
                 ConnectionStringSetting = "CosmosConnection", 
                 Id = "github_main", 
-                PartitionKey = "github_main")] CounterJson counter,
-            Microsoft.Azure.Functions.Worker.FunctionContext context)
+                PartitionKey = "github_main")] CounterJson counter01,
+            FunctionContext context)
         {
        //     counter.Count++;
-            return counter;
+            return counter01;
         }
     }
 
