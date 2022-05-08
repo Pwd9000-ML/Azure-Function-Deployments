@@ -9,7 +9,7 @@ namespace My.Function
     public static class ConsCount01
     {
         [FunctionName("ConsCount01")]
-        [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection")]
+        [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection", PartitionKey = "github_main")]
         public static object Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             [CosmosDB(
@@ -28,10 +28,10 @@ namespace My.Function
 
     public class CounterJson
     {
-        //   [System.Text.Json.Serialization.JsonPropertyName("id")]
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
         public string Id { get; set; }
 
-        //     [System.Text.Json.Serialization.JsonPropertyName("count")]
+        [System.Text.Json.Serialization.JsonPropertyName("count")]
         public int Count { get; set; }
     }
 }
