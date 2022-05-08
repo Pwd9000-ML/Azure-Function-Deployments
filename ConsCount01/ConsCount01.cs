@@ -12,13 +12,13 @@ namespace My.Function
         [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection", CreateIfNotExists = true)]
         public static object Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            [CosmosDB(
+            [CosmosDBInput(
                 databaseName: "%DatabaseName%",
                 collectionName: "%CollectionName%",
                 ConnectionStringSetting = "CosmosConnection",
                 Id = "1",
                 PartitionKey = "1")] CounterJson counter01,
-            ILogger log)
+            FunctionContext context)
         {
             counter01.Count++;
 
