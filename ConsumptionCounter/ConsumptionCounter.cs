@@ -36,6 +36,5 @@ namespace GitHub.Counter
         public int Count {get;set;}
     }
 }
-
 // dotnet add package Microsoft.Azure.WebJobs.Extensions.CosmosDB
 // dotnet add package Microsoft.Azure.Functions.Worker.Extensions.CosmosDB
