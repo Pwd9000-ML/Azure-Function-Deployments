@@ -9,18 +9,18 @@ namespace My.Function
     public static class ConsCount01
     {
         [FunctionName("ConsCount01")]
-        [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection", CreateIfNotExists = true)]
+       // [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection")]
         public static object Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            [CosmosDBInput(
+            [CosmosDB(
                 databaseName: "%DatabaseName%",
                 collectionName: "%CollectionName%",
                 ConnectionStringSetting = "CosmosConnection",
                 Id = "1",
                 PartitionKey = "1")] CounterJson counter01,
-            FunctionContext context)
+            ILogger log)
         {
-            counter01.Count++;
+      //      counter01.Count++;
 
             return counter01;
         }
