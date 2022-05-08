@@ -16,11 +16,11 @@ namespace GitHub.Counter
     public static class ConsumptionCounter
     {
         [FunctionName("ConsumptionCounter")]
-        [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection", CreateIfNotExists = true)]
+        [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection")]
         public static object Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             [CosmosDBInput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection", Id = "github_main", PartitionKey = "github_main")] CounterJson counter,
-            ILogger log)
+            Microsoft.Azure.Functions.Worker.FunctionContext context)
         {
             counter.Count++;
             return counter;
@@ -38,3 +38,4 @@ namespace GitHub.Counter
 }
 // dotnet add package Microsoft.Azure.WebJobs.Extensions.CosmosDB
 // dotnet add package Microsoft.Azure.Functions.Worker.Extensions.CosmosDB
+// dotnet add package Microsoft.Azure.Functions.Worker.Core
