@@ -2,7 +2,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
-
+using Microsoft.Extensions.Logging;
 
 namespace My.Function
 {
@@ -18,7 +18,7 @@ namespace My.Function
                 ConnectionStringSetting = "CosmosConnection",
                 Id = "github_main",
                 PartitionKey = "github_main")] CounterJson counter01,
-            FunctionContext context)
+            ILogger log)
         {
             counter01.Count++;
             return counter01;
