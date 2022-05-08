@@ -12,7 +12,7 @@ namespace My.Function
        // [CosmosDBOutput("%DatabaseName%", "%CollectionName%", ConnectionStringSetting = "CosmosConnection")]
         public static object Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            [CosmosDBInput(
+            [CosmosDB(
                 databaseName: "VisitorCounter",
                 collectionName: "GitHubCounter",
                 ConnectionStringSetting = "CosmosConnection",
